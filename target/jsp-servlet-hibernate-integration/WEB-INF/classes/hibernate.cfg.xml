@@ -16,14 +16,14 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<!-- use 'create' to Create tables on application startup else use 'update' -->
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property>
 
 		<!-- JDBC connection pool -->
 		<property name="connection.pool_size">5</property>
 		<property name="current_session_context_class">thread</property>
 
 		<!-- Domain Model classes to be mapped -->
- 		<mapping class="com.prowings.entities.Student" />
+ 		<mapping class="com.prowings.entities.StudentEntity" />
 
 	</session-factory>
 </hibernate-configuration>

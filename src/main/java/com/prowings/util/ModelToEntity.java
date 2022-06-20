@@ -16,5 +16,17 @@ public class ModelToEntity {
 		return entity;
 		
 	}
+	
+	public static Student convertToStudentModel(StudentEntity entity)
+	{
+		Student model = new Student();
+		
+		model.setRoll(entity.getRoll());
+		model.setName(entity.getName());
+		model.setAddress(entity.getAddress());
+		
+		return model;
+		
+	}
 
 }

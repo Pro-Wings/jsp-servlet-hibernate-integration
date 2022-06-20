@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.prowings.dao.StudentDao;
 import com.prowings.dao.StudentDaoImpl;
+import com.prowings.entities.StudentEntity;
 import com.prowings.model.Student;
 import com.prowings.util.ModelToEntity;
 
@@ -19,8 +20,12 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public Student getStudentByRoll(int roll) {
-		// TODO Auto-generated method stub
-		return null;
+		StudentEntity entity = stdDao.getStudentByRoll(roll);
+		
+		if(null != entity)
+			return ModelToEntity.convertToStudentModel(entity);
+		else
+			return null;
 	}
 
 	@Override

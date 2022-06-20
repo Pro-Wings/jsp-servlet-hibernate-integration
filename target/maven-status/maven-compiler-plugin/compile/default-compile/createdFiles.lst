@@ -1,3 +1,4 @@
+com\prowings\controller\GetStudentController.class
 com\prowings\service\StudentService.class
 com\prowings\dao\StudentDao.class
 com\prowings\dao\HibernateUtil.class

@@ -2,6 +2,7 @@ package com.prowings.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,10 +15,10 @@ public class StudentDaoImpl implements StudentDao{
 	
 	@Override
 	public boolean createStudent(StudentEntity std) {
-
+		Session session = null;
 		try
 		{
-			Session session = factory.openSession();
+			session = factory.openSession();
 			Transaction tx = session.beginTransaction();
 			session.save(std);
 			tx.commit();
@@ -31,15 +32,37 @@ public class StudentDaoImpl implements StudentDao{
 			return false;
 		}
 		finally {
-			HibernateUtil.close();
+			session.close();
 		}
 		
 	}
 
 	@Override
 	public StudentEntity getStudentByRoll(int roll) {
-		// TODO Auto-generated method stub
-		return null;
+		StudentEntity entity = new StudentEntity();
+		String hql ="from StudentEntity student where student.roll = :rollNumber";
+		Session session = null;
+
+		try
+		{
+			session = factory.openSession();
+			Transaction tx = session.beginTransaction();
+			Query<StudentEntity>  query = session.createQuery(hql);
+			query.setParameter("rollNumber", roll);
+			entity = query.uniqueResult();
+			
+			tx.commit();
+			
+			System.out.println("Student record fetched from DB successfully!!!");
+			return entity;
+		}
+		catch (Exception e) {
+			System.out.println("Unable to fetch Student record from DB!!! ");
+			e.printStackTrace();
+			return null;
+		}
+		finally {
+			session.close();		}
 	}
 
 	@Override
